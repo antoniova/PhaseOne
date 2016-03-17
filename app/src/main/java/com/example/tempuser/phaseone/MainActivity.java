@@ -13,10 +13,12 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FloatingActionButton mFab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.mainest_activity_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if(toolbar != null) {
             toolbar.setTitle("agIDE");
@@ -24,7 +26,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Get a handle on the ViewPager and set it up
-        ViewPager viewPager = (ViewPager) findViewById(R.id.main_view_pager);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.main_view_pager);
+        viewPager.addOnPageChangeListener(
+                new ViewPager.SimpleOnPageChangeListener(){
+                    @Override
+                    public void onPageSelected(int position){
+                        // TODO: handle hiding and showing the FAB here
+                    }
+                }
+        );
         CustomPagerAdapter adapter = new CustomPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.main_tab_layout);
@@ -53,4 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void onFabClicked(View view){
+        Snackbar.make(view, "Add something here later", Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show();
+    }
+
+
 }

@@ -65,15 +65,6 @@ public class EditorFragment extends Fragment {
             mAdapter = new Adapter(mDataSet);
             mRecyclerView.setAdapter(mAdapter);
         }
-        if(mFab  != null){
-            mFab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v, "Add something here later", Snackbar.LENGTH_SHORT)
-                            .setAction("Action", null).show();
-                }
-            });
-        }
 
     }
 
