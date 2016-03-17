@@ -13,6 +13,11 @@ public class CustomPagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
+    // titles to be used in the tablayout. Returned using getPageTitle()
+    private String[] tabTitles = { "Editor", "Browser", "Results"};
+    // the number of panels created on the ViewPager
+    private int panelCount = 3;
+
 
     @Override
     public Fragment getItem(int pos){
@@ -29,7 +34,13 @@ public class CustomPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount(){
-        return 3;
+        return panelCount;
     }
+
+    @Override
+    public CharSequence getPageTitle(int position){
+        return tabTitles[position];
+    }
+
 
 }

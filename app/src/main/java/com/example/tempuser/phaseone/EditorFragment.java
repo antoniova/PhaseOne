@@ -1,6 +1,8 @@
 package com.example.tempuser.phaseone;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +22,10 @@ public class EditorFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private String[] mDataSet = { "mon", "tue", "wed", "thu", "fri", "sat", "sun"};
+    private FloatingActionButton mFab;
+    private String[] mDataSet = { "mon", "tue", "wed", "thu", "fri", "sat", "sun",
+    "jan", "feb","mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec",
+    "add 0 0", "noop", "load 1", "jump", "halt"};
 
 
     public static EditorFragment getInstance(){
@@ -37,15 +42,17 @@ public class EditorFragment extends Fragment {
     }
 
     /**
-     * Fragment UI is created here
+     * Fragment UI is created here. This is also a good place to grab a handle on certain
+     * items on the UI
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
 
         View v = inflater.inflate(R.layout.editor_layout, container, false);
-        // let's get a handle on the RecyclerView
+
         mRecyclerView = (RecyclerView) v.findViewById(R.id.editor_recycler_view);
+        mFab = (FloatingActionButton) v.findViewById(R.id.editor_fab);
         return v;
     }
 
@@ -57,6 +64,15 @@ public class EditorFragment extends Fragment {
             mRecyclerView.setLayoutManager(mLayoutManager);
             mAdapter = new Adapter(mDataSet);
             mRecyclerView.setAdapter(mAdapter);
+        }
+        if(mFab  != null){
+            mFab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(v, "Add something here later", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                }
+            });
         }
 
     }
@@ -89,6 +105,8 @@ public class EditorFragment extends Fragment {
         public Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int ViewType){
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.editor_line_layout, parent, false);
+
+            // need to set padding and all other layoutparams
 
             ViewHolder viewHolder = new ViewHolder(v);
             return  viewHolder;

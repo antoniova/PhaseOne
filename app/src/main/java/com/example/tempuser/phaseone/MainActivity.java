@@ -3,6 +3,7 @@ package com.example.tempuser.phaseone;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,12 +18,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null) {
+            toolbar.setTitle("agIDE");
+        }
         setSupportActionBar(toolbar);
 
         // Get a handle on the ViewPager and set it up
         ViewPager viewPager = (ViewPager) findViewById(R.id.main_view_pager);
         CustomPagerAdapter adapter = new CustomPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.main_tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
 
